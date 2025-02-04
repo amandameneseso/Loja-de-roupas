@@ -1,9 +1,11 @@
 import { Button, Card, CardContent, Typography } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
 import Navbar from './components/Navbar';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const App = () => {
   return (
+    <Router>
     <>
     <Navbar />
     <div style={{ padding: '2rem' }}>
@@ -28,6 +30,7 @@ const App = () => {
       </Card>
     </div>
     </>
+    </Router>
   );
 };
 
