@@ -1,10 +1,33 @@
+import { Button, Card, CardContent, Typography } from '@mui/material';
+import { ShoppingCart } from '@mui/icons-material';
+import Navbar from './components/Navbar';
+
 const App = () => {
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold text-red-600">
-        Minha Loja de Roupas
-      </h1>
+    <>
+    <Navbar />
+    <div style={{ padding: '2rem' }}>
+      <Typography variant="h3" color="primary" gutterBottom>
+        🧥 Loja de Roupas
+      </Typography>
+
+      <Card sx={{ maxWidth: 345 }}>
+        <CardContent>
+          <Typography variant="h5">Jaqueta Jeans</Typography>
+          <Typography variant="body2" color="text.secondary">
+            Jaqueta em denim lavado, estilo clássico.
+          </Typography>
+          <Button 
+            variant="contained" 
+            startIcon={<ShoppingCart />}
+            sx={{ mt: 2 }}
+          >
+            Comprar R$ 299
+          </Button>
+        </CardContent>
+      </Card>
     </div>
+    </>
   );
 };
 
