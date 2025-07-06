@@ -1,0 +1,9 @@
+/* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* body {
+  margin: 50px;
+  font-family: sans-serif;
+} */
