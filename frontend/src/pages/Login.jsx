@@ -1,11 +1,26 @@
 // Login.jsx
-import React from 'react'
+import React, { useState } from 'react'
 
 const Login = () => {
-    return (
-        <div>
 
-        </div>
+    const[currentState, setCurrentState] = useState('Cadastre-se')
+
+    return (
+        <form className='flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800'>
+            <div className='inline-flex items-center gap-2 mb-2 mt-10'>
+                <p className='prata-regular text-3xl'>{currentState}</p>
+                <hr className='border-none h-[1.5px] w-8 bg-gray-800' />
+            </div>
+            {currentState === 'Entrar' ? '' : <input type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='Nome' required/>}
+            <input type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='E-mail' required/>
+            <input type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='Senha' required/>
+            <div className='w-full flex justify-between text-sm mt-[-8px]'>
+                <p className='cursor-pointer'>Esqueci minha senha</p>
+                {
+                    
+                }
+            </div>
+        </form>
     )
 }
 
