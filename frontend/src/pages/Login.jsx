@@ -17,7 +17,9 @@ const Login = () => {
             <div className='w-full flex justify-between text-sm mt-[-8px]'>
                 <p className='cursor-pointer'>Esqueci minha senha</p>
                 {
-                    
+                    currentState === 'Entrar'
+                    ? <p className='cursor-pointer'>Criar conta</p>
+                    : <p className='cursor-pointer'>Entrar</p>
                 }
             </div>
         </form>
