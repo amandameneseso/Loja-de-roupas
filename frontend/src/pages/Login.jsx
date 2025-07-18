@@ -18,11 +18,11 @@ const Login = () => {
             <input type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='E-mail' required/>
             <input type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='Senha' required/>
             <div className='w-full flex justify-between text-sm mt-[-8px]'>
-                <p className='cursor-pointer'>Esqueci minha senha</p>
+                <p className='cursor-pointer'>{currentState === 'Fazer login' ? 'Esqueci minha senha' : ''}</p>
                 {
                     currentState === 'Fazer login'
                     ? <p onClick={()=>setCurrentState('Cadastre-se')} className='cursor-pointer'>Não tem uma conta? Cadastre-se</p>
-                    : <p onClick={()=>setCurrentState('Fazer login')} className='cursor-pointer'>Fazer login</p>
+                    : <p onClick={()=>setCurrentState('Fazer login')} className='cursor-pointer'>Já tem uma conta? Fazer login</p>
                 }
             </div>
             <button className='bg-black text-white font-light px-8 py-2 mt-4'>{currentState === 'Fazer login' ? 'Entrar' : 'Criar conta'}</button>
