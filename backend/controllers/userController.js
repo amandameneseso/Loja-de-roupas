@@ -9,7 +9,34 @@ const createToken = (id) => {
 };
 
 // rota para login do usuário
-const loginUser = async (req, res) => {};
+const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body; // extrai os dados do corpo da requisição
+
+        // 1. Encontrar o usuário pelo e-mail
+        const user = await userModel.findOne({ email });
+
+        // 2. Verificar se o usuário existe
+        if (!user) {
+            return res.json({ success: false, message: "E-mail não encontrado." });
+        }
+
+        // 3. Comparar a senha fornecida com a senha criptografada no banco de dados
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        // 4. Verificar se as senhas correspondem e gerar token se as senhas correspondem
+        if (isMatch) {
+            const token = createToken(user._id);
+            res.json({ success: true, token });
+        } else {
+            res.json({ success: false, message: "Credenciais inválidas." });
+        }
+
+    } catch (error) {
+        console.error("Erro ao fazer login do usuário:", error);
+        res.json({ success: false, message: error.message });
+    }
+};
 
 // rota para cadastro do usuário
 const registerUser = async (req, res) => {
@@ -57,8 +84,8 @@ const registerUser = async (req, res) => {
         res.json({ success: true, token });
 
     } catch (error) {
-        console.error(error);
-        res.json({ success: false, message: "Ocorreu um erro ao registrar o usuário: " + error.message });
+        console.error("Erro ao registrar usuário:", error);
+        res.json({ success: false, message: error.message });
     }
 };
 
