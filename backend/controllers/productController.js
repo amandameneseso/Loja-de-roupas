@@ -40,18 +40,43 @@ const addProduct = async (req, res) => {
 
         res.json({ success: true, message: "Produto adicionado com sucesso!" });
     } catch (error) {
-        console.error("Erro ao adicionar produto:", error);
+        console.log("Erro ao adicionar produto:", error);
         res.json({ success: false, message: error.message });
     }
 }
 
 // função para listar os produtos do banco de dados
-const listProducts = async (req, res) => {}
+const listProducts = async (req, res) => {
+    try {
+        const products = await productModel.find({});
+        res.json({ success: true, products });
+    } catch (error) {
+        console.log("Erro ao listar produtos:", error);
+        res.json({ success: false, message: error.message });
+    }
+}
 
 // função para remover um produto do banco de dados
-const removeProduct = async (req, res) => {}
+const removeProduct = async (req, res) => {
+    try {
+        await productModel.findByIdAndDelete(req.body.id);
+        res.json({ success: true, message: "Produto removido." });
+    } catch (error) {
+        console.log("Erro ao remover produto:", error);
+        res.json({ success: false, message: error.message });
+    }
+}
 
 // função para obter um produto do banco de dados
-const singleProduct = async (req, res) => {}
+const singleProduct = async (req, res) => {
+    try {
+        const { productId } = req.body;
+        const product = await productModel.findById(productId);
+        res.json({ success: true, product });
+    } catch (error) {
+        console.log("Erro ao obter produto:", error);
+        res.json({ success: false, message: error.message });
+    }
+}
 
 export { addProduct, listProducts, removeProduct, singleProduct };
