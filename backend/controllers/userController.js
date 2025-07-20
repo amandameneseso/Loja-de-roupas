@@ -90,6 +90,20 @@ const registerUser = async (req, res) => {
 };
 
 // rota para login do admin
-const adminLogin = async (req, res) => {};
+const adminLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body; // extrai os dados do corpo da requisição
+
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+            const token = jwt.sign(email+password, process.env.JWT_SECRET);
+            res.json({ success: true, token });
+        } else {
+            res.json({ success: false, message: "Credenciais inválidas." });
+        }
+    } catch (error) {
+        console.log("Erro ao fazer login do admin:", error);
+        res.json({ success: false, message: error.message });
+    }
+};
 
 export { loginUser, registerUser, adminLogin };
