@@ -8,6 +8,12 @@
   font-family: "Outfit", sans-serif;
 }
 
+select,input,textarea {
+  border: 1px solid #c2c2c2;
+  outline-color: #975b65;
+  border-radius: 4px;
+}
+
 .active {
   background-color: #fdf0f4;
   color: #975b65;
