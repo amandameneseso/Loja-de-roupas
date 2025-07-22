@@ -61,6 +61,7 @@ const Add = ({token}) => {
   return (
     <form onSubmit={onSubmitHandler} className="flex flex-col w-full items-start gap-3">
       <div>
+        <p className="mb-2 font-semibold text-gray-800">Adicionar produto</p>
         <p className="mb-2">Carregar imagem</p>
         <div className="flex gap-2">
           <label htmlFor="image1">
