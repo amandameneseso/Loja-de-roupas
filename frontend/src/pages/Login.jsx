@@ -1,11 +1,41 @@
 // Login.jsx
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { ShopContext } from '../context/ShopContext'
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
-    const[currentState, setCurrentState] = useState('Cadastre-se');
+    const [currentState, setCurrentState] = useState('Cadastre-se');
+    const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     const onSubmitHandler = async (event) => {
         event.preventDefault();
+        try {
+            if (currentState === 'Cadastre-se') {
+                const response = await axios.post(backendUrl + '/api/user/register', {name, email, password});
+                if (response.data.success) {
+                    setToken(response.data.token);
+                    localStorage.setItem('token', response.data.token);
+                } else {
+                    toast.error(response.data.message);
+                }
+            } else {
+                const response = await axios.post(backendUrl + '/api/user/login', {email, password});
+                if (response.data.success) {
+                    setToken(response.data.token);
+                    localStorage.setItem('token', response.data.token);
+                } else {
+                    toast.error(response.data.message);
+                }
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        }
     }
 
     return (
@@ -14,9 +44,11 @@ const Login = () => {
                 <p className='prata-regular text-3xl'>{currentState}</p>
                 <hr className='border-none h-[1.5px] w-8 bg-gray-800' />
             </div>
-            {currentState === 'Fazer login' ? '' : <input type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='Nome' required/>}
-            <input type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='E-mail' required/>
-            <input type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='Senha' required/>
+            {currentState === 'Fazer login'
+            ? ''
+            : <input onChange={(e)=>setName(e.target.value)} value={name} type="text" className='w-full px-3 py-2 border border-gray-800' placeholder='Nome' required/>}
+            <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" className='w-full px-3 py-2 border border-gray-800' placeholder='E-mail' required/>
+            <input onChange={(e)=>setPassword(e.target.value)} value={password} type="password" className='w-full px-3 py-2 border border-gray-800' placeholder='Senha' required/>
             <div className='w-full flex justify-between text-sm mt-[-8px]'>
                 <p className='cursor-pointer'>{currentState === 'Fazer login' ? 'Esqueci minha senha' : ''}</p>
                 {
