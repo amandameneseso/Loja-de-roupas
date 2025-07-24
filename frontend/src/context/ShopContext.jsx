@@ -1,5 +1,5 @@
 // ShopContext.jsx
-import { createContext, useEffect, useState } from "react";
+import { createContext, use, useEffect, useState } from "react";
 // import { products } from "../assets/frontend_assets/assets.js";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -96,6 +96,12 @@ const ShopContextProvider = (props) => {
 
   useEffect(() => {
     getProductsData();
+  }, []);
+
+  useEffect(() => {
+    if (!token && localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    }
   }, []);
 
   const value = {

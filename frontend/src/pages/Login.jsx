@@ -1,12 +1,12 @@
 // Login.jsx
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Login = () => {
 
-    const [currentState, setCurrentState] = useState('Cadastre-se');
+    const [currentState, setCurrentState] = useState('Fazer login');
     const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -37,6 +37,12 @@ const Login = () => {
             toast.error(error.message);
         }
     }
+
+    useEffect(() => {
+        if (token) {
+            navigate('/');
+        }
+    }, [token]);
 
     return (
         <form onSubmit={onSubmitHandler} className='flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800'>
