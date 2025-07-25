@@ -59,7 +59,14 @@ const userOrders = async (req, res) => {
 
 // atualizar status do pedido do painel de administrador
 const updateStatus = async (req, res) => {
-    
+    try {
+        const { orderId, status } = req.body;
+        await orderModel.findByIdAndUpdate(orderId, { status });
+        res.json({ success: true, message: "Status atualizado" });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
 }
 
 export { placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus }
