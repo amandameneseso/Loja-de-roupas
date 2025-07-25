@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Orders = () => {
   const { backendUrl, token, currency } = useContext(ShopContext);
@@ -17,7 +18,7 @@ const Orders = () => {
       if (response.data.success) {
         let allOrdersItem = [];
         response.data.orders.map((order)=>{
-          order.item.map((item)=>{
+          order.items.map((item)=>{
             item['status'] = order.status;
             item['payment'] = order.payment;
             item['paymentMethod'] = order.paymentMethod;
@@ -28,7 +29,8 @@ const Orders = () => {
         setOrderData(allOrdersItem.reverse());
       }
     } catch (error) {
-      
+      console.log(error);
+      toast.error(error.message);
     }
   }
 

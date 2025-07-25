@@ -1,4 +1,5 @@
 import orderModel from "../models/orderModel.js";
+import userModel from "../models/userModel.js";
 
 // pedidos usando método "pagamento na entrega"
 const placeOrder = async (req, res) => {
@@ -9,7 +10,7 @@ const placeOrder = async (req, res) => {
             items,
             address,
             amount,
-            paymentMethod: "Pagamento na entrega",
+            paymentMethod: "pagamento na entrega",
             payment: false,
             date: Date.now(),
         }
