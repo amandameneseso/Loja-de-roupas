@@ -1,4 +1,3 @@
-// backend/routes/orderRoute.js
 import express from "express";
 import { placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus } from "../controllers/orderController.js";
 import adminAuth from "../middleware/adminAuth.js";
