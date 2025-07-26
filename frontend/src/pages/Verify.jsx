@@ -1,4 +1,3 @@
-// frontend/src/pages/Verify.jsx
 import React, { useContext, useEffect } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { useSearchParams } from "react-router-dom";

@@ -1,4 +1,3 @@
-// backend/controllers/orderController.js
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
@@ -19,7 +18,7 @@ const placeOrder = async (req, res) => {
             items,
             address,
             amount,
-            paymentMethod: "pagamento na entrega",
+            paymentMethod: "Pagamento na entrega",
             payment: false,
             date: Date.now(),
         }
@@ -106,11 +105,6 @@ const verifyStripe = async (req, res) => {
     }
 }
 
-// pedidos usando método Razorpay
-const placeOrderRazorpay = async (req, res) => {
-    
-}
-
 // dados de todos os pedidos para o painel de administração
 const allOrders = async (req, res) => {
     try {
@@ -146,4 +140,4 @@ const updateStatus = async (req, res) => {
     }
 }
 
-export { placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, verifyStripe };
+export { placeOrder, placeOrderStripe, allOrders, userOrders, updateStatus, verifyStripe };

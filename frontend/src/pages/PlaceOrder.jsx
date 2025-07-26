@@ -7,7 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const PlaceOrder = () => {
-  const [method, setMethod] = useState("pe");
+  const [method, setMethod] = useState("stripe");
   const {navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, delivery_fee, products} = useContext(ShopContext);
   const [formData, setFormData] = useState({
     firstName: "", // primeiro nome
@@ -51,8 +51,8 @@ const PlaceOrder = () => {
       }
 
       switch(method) {
-        // chamada de API para pagamento padrão ("pagamento na entrega - pe")
-        case "pe": {
+        // chamada de API para pagamento padrão ("pagamento na entrega - PE")
+        case "PE": {
           const response = await axios.post(backendUrl + '/api/order/place', orderData, {headers: {token}});
           console.log(response.data);
           if (response.data.success) {
@@ -84,7 +84,7 @@ const PlaceOrder = () => {
   }
 
   return (
-    <form onSubmit={onSubmitHandler} className="flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t">
+    <form onSubmit={onSubmitHandler} className="flex flex-col sm:flex-row justify-between gap-3 pt-5 sm:pt-14 min-h-[80vh] border-t">
       {/* left side */}
       <div className="flex flex-col gap-4 w-full sm:max-w-[480px]">
         <div className="text-xl sm:text-2xl my-3">
@@ -169,8 +169,8 @@ const PlaceOrder = () => {
       </div>
 
       {/* right side */}
-      <div className="mt-8">
-        <div className="mt-8 min-w-80">
+      <div>
+        <div className="mt-3 min-w-80">
           <CartTotal />
         </div>
 
@@ -181,12 +181,8 @@ const PlaceOrder = () => {
               <p className={`min-w-3.5 h-3.5 border rounded-full ${method === "stripe" ? "bg-green-400" : ""}`}></p>
               <img className="h-5 mx-4" src={assets.stripe_logo} alt="" />
             </div>
-            <div onClick={()=>{setMethod("razorpay")}} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
-              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === "razorpay" ? "bg-green-400" : ""}`}></p>
-              <img className="h-5 mx-4" src={assets.razorpay_logo} alt="" />
-            </div>
-            <div onClick={()=>{setMethod("Pagamento na entrega")}} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
-              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === "pe" ? "bg-green-400" : ""}`}></p>
+            <div onClick={()=>{setMethod("PE")}} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
+              <p className={`min-w-3.5 h-3.5 border rounded-full ${method === "PE" ? "bg-green-400" : ""}`}></p>
               <p className="text-gray-500 text-sm font-medium mx-4">Pagamento na entrega</p>
             </div>
           </div>
