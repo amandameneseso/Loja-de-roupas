@@ -1,4 +1,3 @@
-// About.jsx
 import React from "react";
 import Title from "../components/Title";
 import { assets } from "../assets/frontend_assets/assets.js";
@@ -12,12 +11,12 @@ const About = () => {
       </div>
 
       <div className="my-10 flex flex-col md:flex-row gap-16">
-        <img className='w-full md:max-w-[450px]' src={assets.about_img} alt="" />
+        <img className='w-full md:max-w-[450px] shadow-md' src={assets.about_img} alt="" />
         <div className="flex flex-col justify-center gap-6 md:w-2/4 text-gray-600">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, provident ullam adipisci in enim ipsa autem? Illum possimus eius quos libero provident laborum? Veniam culpa fugit enim recusandae consequuntur ad.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati ex illum voluptas quaerat totam laudantium facilis reiciendis maxime, atque quibusdam impedit, error ipsa itaque accusantium, eum explicabo commodi consequuntur incidunt.</p>
+            <p>A Loja Marô atua para ressignificar a cultura de consumo e gerar impacto positivo, fomentando a Moda Circular e democratizando o acesso a marcas nacionais e importadas a todas as classes sociais. </p>
+            <p>Acreditamos que as roupas mais sustentáveis são aquelas que já existem, por isso promovemos a compra e a venda de roupas usadas em ótimo estado. Com uma curadoria inteligente e responsável, nossa seleção é especializada em peças second hand e também em itens novos, com qualidade e de marcas nacionais e importadas.</p>
             <b className="text-gray-800">Nossa missão</b>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt, doloribus! Voluptates molestiae autem laborum eius adipisci corporis tempore libero, dignissimos praesentium voluptatum distinctio voluptate deserunt numquam, repudiandae quisquam quia corrupti.</p>
+            <p>Nossa missão na Loja Marô é revolucionar a forma como as pessoas consomem moda, oferecendo uma plataforma acessível e inspiradora para o comércio de roupas, tanto de primeira quanto de segunda mão. Buscamos promover a economia circular, incentivando a reutilização de peças de qualidade e a criação de um estilo autêntico e consciente para todos.</p>
         </div>
       </div>
 
