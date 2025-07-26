@@ -1,3 +1,4 @@
+// backend/controllers/orderController.js
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import Stripe from "stripe";
@@ -89,15 +90,15 @@ const placeOrderStripe = async (req, res) => {
 
 // verificar stripe
 const verifyStripe = async (req, res) => {
-    const { orderId, success, userId } = req.query;
+    const { orderId, success, userId } = req.body;
     try {
         if (success === "true") {
             await orderModel.findByIdAndUpdate(orderId, { payment: true }); // marca o pedido como pago
             await userModel.findByIdAndUpdate(userId, { cartData: {} }); // limpa o carrinho do usuário
-            res.json({ success: true, message: "Pagamento realizado com sucesso!" });
+            res.json({ success: true });
         } else {
             await orderModel.findByIdAndDelete(orderId); // remove o pedido se o pagamento falhar
-            res.json({ success: false, message: "Pagamento falhou." });
+            res.json({ success: false });
         }
     } catch (error) {
         console.log(error);
