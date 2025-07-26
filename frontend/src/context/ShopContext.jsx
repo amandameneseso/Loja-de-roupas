@@ -101,7 +101,7 @@ const ShopContextProvider = (props) => {
     try {
       const response = await axios.get('/api/product/list');
       if (response.data.success) {
-        setProducts(response.data.products);
+        setProducts(response.data.data);
       } else {
         toast.error(response.data.message);
       };
