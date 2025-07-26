@@ -66,7 +66,7 @@ const placeOrderStripe = async (req, res) => {
             price_data: {
                 currency: currency,
                 product_data: {
-                    name: "taxas de entrega",
+                    name: "Taxas de entrega",
                 },
                 unit_amount: deliveryCharge * 100,
             },
@@ -81,6 +81,24 @@ const placeOrderStripe = async (req, res) => {
         })
 
         res.json({ success: true, session_url:session.url });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+}
+
+// verificar stripe
+const verifyStripe = async (req, res) => {
+    const { orderId, success, userId } = req.query;
+    try {
+        if (success === "true") {
+            await orderModel.findByIdAndUpdate(orderId, { payment: true }); // marca o pedido como pago
+            await userModel.findByIdAndUpdate(userId, { cartData: {} }); // limpa o carrinho do usuário
+            res.json({ success: true, message: "Pagamento realizado com sucesso!" });
+        } else {
+            await orderModel.findByIdAndDelete(orderId); // remove o pedido se o pagamento falhar
+            res.json({ success: false, message: "Pagamento falhou." });
+        }
     } catch (error) {
         console.log(error);
         res.json({ success: false, message: error.message });
@@ -127,4 +145,4 @@ const updateStatus = async (req, res) => {
     }
 }
 
-export { placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus }
+export { placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, userOrders, updateStatus, verifyStripe };
