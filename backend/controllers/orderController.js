@@ -1,5 +1,13 @@
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
+import Stripe from "stripe";
+
+// variaveis globais
+const currency = "BRL";
+const deliveryCharge = 10;
+
+// inicialização do gateway
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // pedidos usando método "pagamento na entrega"
 const placeOrder = async (req, res) => {
@@ -26,7 +34,57 @@ const placeOrder = async (req, res) => {
 
 // pedidos usando método Stripe
 const placeOrderStripe = async (req, res) => {
-    
+    try {
+        const { userId, items, amount, address } = req.body;
+        const { origin } = req.headers;
+
+        // criar o pedido no banco de dados
+        const orderData = {
+            userId,
+            items,
+            address,
+            amount,
+            paymentMethod: "Stripe",
+            payment: false, // o pagamento ainda não foi confirmado
+            date: Date.now(),
+        }
+        const newOrder = new orderModel(orderData); // cria um novo pedido
+        await newOrder.save(); // salva o pedido no banco de dados
+
+        const line_items = items.map((item) => ({
+            price_data: {
+                currency: currency,
+                product_data: {
+                    name: item.name,
+                },
+                unit_amount: item.price * 100,
+            },
+            quantity: item.quantity
+        }))
+
+        line_items.push({
+            price_data: {
+                currency: currency,
+                product_data: {
+                    name: "taxas de entrega",
+                },
+                unit_amount: deliveryCharge * 100,
+            },
+            quantity: 1
+        })
+
+        const session = await stripe.checkout.sessions.create({
+            success_url: `${origin}/verify?success=true&orderId=${newOrder._id}`,
+            cancel_url: `${origin}/verify?success=false&orderId=${newOrder._id}`,
+            line_items,
+            mode: "payment",
+        })
+
+        res.json({ success: true, session_url:session.url });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
 }
 
 // pedidos usando método Razorpay
