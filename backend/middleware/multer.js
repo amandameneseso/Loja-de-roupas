@@ -1,4 +1,3 @@
-// middleware/multer.js
 import multer from "multer";
 
 // configurações de armazenamento do multer
