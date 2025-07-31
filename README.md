@@ -49,8 +49,8 @@ Este é um projeto completo de uma loja online. Este projeto demonstra a constru
 - **Nodemon**: Para reiniciar o servidor automaticamente durante o desenvolvimento.
 
 ### Autenticação
-- Criptografia de senhas com bcrypt.
-- Validação de dados com validator.
+- Criptografia de senhas com Bcrypt.
+- Validação de dados com Validator.
 - Gerenciamento de sessão com JSON Web Tokens (JWT).
 
 ### Hospedagem
