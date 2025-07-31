@@ -89,7 +89,7 @@ const Product = () => {
           <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
             <p>
               As cores do produto podem variar de acordo com o monitor,
-              ailuminação do ambiente ou sua percepção visual.
+              a iluminação do ambiente ou sua percepção visual.
             </p>
           </div>
         </div>
