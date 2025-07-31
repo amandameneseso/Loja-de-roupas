@@ -96,7 +96,7 @@ const Product = () => {
       </div>
 
       {/* description and review section */}
-      <div className="mt-20">
+      {/* <div className="mt-20">
         <div className="flex">
           <b className="border px-5 py-3 text-sm">Descrição</b>
           <p className="border px-5 py-3 text-sm">Avaliações (122)</p>
@@ -114,7 +114,7 @@ const Product = () => {
             possimus, aspernatur sint.
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* related products */}
       <RelatedProducts category={productData.category} subCategory={productData.subCategory} />

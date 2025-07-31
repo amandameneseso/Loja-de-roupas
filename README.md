@@ -6,7 +6,7 @@ Este é um projeto completo de uma loja online. Este projeto demonstra a constru
 
 ### Usuário
 - **Autenticação de usuários**: Cadastro e login de usuários com segurança (hash de senhas e JWT).
-- **Catálogo de Produtos**: Exibição de produtos com detalhes, filtros por categoria/subcategoria e ordenação por preço.
+- **Catálogo de produtos**: Exibição de produtos com detalhes, filtros por categoria/subcategoria e ordenação por preço.
 - **Gestão de carrinho de compras**:
     - Adicionar/remover itens e ajustar quantidades.
     - Persistência do carrinho para usuários autenticados (no banco de dados) e não autenticados (no localStorage).
