@@ -11,10 +11,10 @@ const NewsletterBox = () => {
         Cadastre-se em nossa newsletter para garantir um cupom de 10% OFF na sua
         primeira compra!
       </p>
-      <p className="text-gray-400 mt-3">
+      {/* <p className="text-gray-400 mt-3">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit
         animi placeat aliquam quibusdam ipsam.
-      </p>
+      </p> */}
       <form onSubmit={onSubmitHandler} className="w-full sm:w-1/2 flex items-center gap-3 mx-auto my-6 border pl-3">
         <input
           className="w-full sm:flex-1 outline-none"
