@@ -1,4 +1,4 @@
-# Sobre o projeto - Loja Marô
+# Loja Marô
 
 Este é um projeto completo de uma loja online. Este projeto demonstra a construção de uma aplicação web moderna com frontend em React e backend em Node.js com banco de dados no MongoDB, integrando diversas funcionalidades essenciais para uma loja virtual. Ele permite que usuários explorem e comprem produtos com variantes de tamanho, façam pedidos com pagamento online via Stripe, e conta com um painel de administração para gerenciamento de produtos e pedidos.
 
