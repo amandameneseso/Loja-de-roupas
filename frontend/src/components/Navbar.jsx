@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
 import { assets } from "../assets/frontend_assets/assets.js";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext.jsx";
 
 const Navbar = () => {
   const [visible,setVisible] = useState(false);
   const { setShowSearch, getCartCount, navigate, token, setToken, setCartItems } = useContext(ShopContext);
+  const location = useLocation(); // Hook para obter a localização atual
 
   const logout =() => {
     navigate('/login');
@@ -13,6 +14,16 @@ const Navbar = () => {
     setToken('');
     setCartItems({});
   }
+
+  // Função para lidar com o clique no ícone de pesquisa
+  const handleSearchIconClick = () => {
+    // Se o usuário não estiver na página /collection, navega para ela
+    if (!location.pathname.includes('/collection')) {
+      navigate('/collection');
+    }
+    // Sempre mostra a barra de pesquisa
+    setShowSearch(true);
+  };
 
   return (
     <>
@@ -42,7 +53,7 @@ const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-6">
-          <img onClick={()=>setShowSearch(true)} src={assets.search_icon} className="w-5 cursor-pointer" alt="" />
+          <img onClick={handleSearchIconClick} src={assets.search_icon} className="w-5 cursor-pointer" alt="" />
           <div className="group relative">
             <img
                 onClick={() => token ? null : navigate('/login')}
